@@ -15,12 +15,13 @@ ext {
     lifecycleLiveDataVersion = '2.5.0'
     navigationUiVersion = '2.5.0'
     navigationFragmentVersion = '2.5.0'
-    gsonVersion = '2.8.9'
     retrofitVersion = '2.9.0'
     picassoVersion = '2.71828'
     materialVersion = '1.6.1'
     constraintLayoutVersion = '2.1.4'
     hiltVersion = '2.42'
+    sandwichVersion = '1.2.6'
+    moshiVersion = '1.13.0'
 
     // Testing
     jUnitVersion = '4.13.2'
@@ -68,13 +69,16 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationUiVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationFragmentVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+    implementation "com.github.skydoves:sandwich:$sandwichVersion"
 
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
 
     testImplementation "junit:junit:$jUnitVersion"
