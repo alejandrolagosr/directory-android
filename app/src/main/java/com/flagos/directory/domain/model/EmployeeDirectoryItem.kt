@@ -4,10 +4,10 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class EmployeeDirectoryResponse(@field:Json(name = "employees") val employees: List<EmployeeResponse> = listOf())
+data class EmployeeDirectoryItem(@field:Json(name = "employees") val employees: List<EmployeeItem> = listOf())
 
 @JsonClass(generateAdapter = true)
-data class EmployeeResponse(
+data class EmployeeItem(
     @field:Json(name = "uuid") val uuid: String,
     @field:Json(name = "full_name") val fullName: String,
     @field:Json(name = "phone_number") val phoneNumber: String,
