@@ -14,15 +14,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(private val employeeDirectoryRepository: EmployeeDirectoryRepository) : ViewModel() {
 
-    private var _onEmployeeDirectoryListRetrieved = MutableLiveData<List<EmployeeItem>>()
-    val onEmployeeDirectoryListRetrieved get() = _onEmployeeDirectoryListRetrieved
-
-    private var _onLoading = MutableLiveData<Boolean>()
-    val onLoading get() = _onLoading
-
-    private var _onError = MutableLiveData<String>()
-    val onError get() = _onError
-
     private var _onEmployeeDirectoryState = MutableLiveData<EmployeeDirectoryState>()
     val onEmployeeDirectoryState get() = _onEmployeeDirectoryState
 
