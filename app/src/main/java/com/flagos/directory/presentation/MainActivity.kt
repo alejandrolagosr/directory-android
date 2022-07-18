@@ -24,8 +24,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.recycler.adapter = adapter
+        setUpViews()
+        setUpObservers()
+    }
 
+    private fun setUpViews() {
+        binding.recycler.adapter = adapter
+        binding.swipeToRefresh.setOnRefreshListener {
+            viewModel.fetchEmployees()
+        }
+    }
+
+    private fun setUpObservers() {
         with(viewModel) {
             fetchEmployees()
             onEmployeeDirectoryState.observe(this@MainActivity) { state -> setUiState(state) }
@@ -33,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUiState(state: EmployeeDirectoryState) {
-        when(state) {
+        when (state) {
             OnEmptyList -> setEmptyState()
             is OnError -> setErrorState(state.error)
             is OnListRetrieved -> adapter.submitList(state.list)
@@ -46,13 +56,14 @@ class MainActivity : AppCompatActivity() {
             binding.progress.visibility = VISIBLE
             binding.textFailedMessage.visibility = GONE
         } else {
+            binding.swipeToRefresh.isRefreshing = false
             binding.progress.visibility = GONE
         }
     }
 
     private fun setErrorState(error: String?) {
         with(binding.textFailedMessage) {
-            text =  String.format(getString(R.string.text_error), error)
+            text = String.format(getString(R.string.text_error), error)
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_error, 0, 0)
             visibility = VISIBLE
         }
@@ -60,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setEmptyState() {
         with(binding.textFailedMessage) {
-            text =  getString(R.string.text_empty)
+            text = getString(R.string.text_empty)
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_empty, 0, 0)
             visibility = VISIBLE
         }
