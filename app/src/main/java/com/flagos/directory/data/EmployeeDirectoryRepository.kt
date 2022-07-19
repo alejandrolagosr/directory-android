@@ -6,10 +6,8 @@ import com.skydoves.sandwich.message
 import com.skydoves.sandwich.onFailure
 import com.skydoves.sandwich.suspendOnSuccess
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class EmployeeDirectoryRepository @Inject constructor(
@@ -20,7 +18,15 @@ class EmployeeDirectoryRepository @Inject constructor(
     @WorkerThread
     fun fetchEmployeeDirectoryList(onStart: () -> Unit, onComplete: () -> Unit, onError: (String?) -> Unit) = flow {
         employeeDirectoryClient.fetchEmployeeDirectoryList()
-            .suspendOnSuccess { emit(data.employees) }
-            .onFailure { onError(message()) }
-    }.onStart { onStart() }.onCompletion { onComplete() }.flowOn(ioDispatcher)
+            .suspendOnSuccess {
+                emit(data.employees)
+            }.onFailure {
+                onError(message())
+            }
+    }.onStart {
+        onStart()
+    }.onCompletion {
+        delay(300)
+        onComplete()
+    }.flowOn(ioDispatcher).conflate()
 }

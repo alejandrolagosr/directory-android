@@ -7,6 +7,7 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import com.flagos.directory.R
 import com.flagos.directory.databinding.ActivityMainBinding
+import com.flagos.directory.domain.model.EmployeeItem
 import com.flagos.directory.presentation.MainViewModel.EmployeeDirectoryState
 import com.flagos.directory.presentation.MainViewModel.EmployeeDirectoryState.*
 import com.flagos.directory.presentation.adapter.EmployeeAdapter
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         when (state) {
             OnEmptyList -> setEmptyState()
             is OnError -> setErrorState(state.error)
-            is OnListRetrieved -> adapter.submitList(state.list)
+            is OnListRetrieved -> setSuccessfulState(state.list)
             is OnLoading -> setLoadingState(state.loading)
         }
     }
@@ -56,12 +57,13 @@ class MainActivity : AppCompatActivity() {
             binding.progress.visibility = VISIBLE
             binding.textFailedMessage.visibility = GONE
         } else {
-            binding.swipeToRefresh.isRefreshing = false
             binding.progress.visibility = GONE
+            binding.swipeToRefresh.isRefreshing = false
         }
     }
 
     private fun setErrorState(error: String?) {
+        changeListVisibility(GONE)
         with(binding.textFailedMessage) {
             text = String.format(getString(R.string.text_error), error)
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_error, 0, 0)
@@ -70,10 +72,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setEmptyState() {
+        changeListVisibility(GONE)
         with(binding.textFailedMessage) {
             text = getString(R.string.text_empty)
             setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_empty, 0, 0)
             visibility = VISIBLE
         }
+    }
+
+    private fun setSuccessfulState(list: List<EmployeeItem>) {
+        changeListVisibility(VISIBLE)
+        adapter.submitList(list)
+    }
+
+    private fun changeListVisibility(visibility: Int) {
+        binding.recycler.visibility = visibility
     }
 }
