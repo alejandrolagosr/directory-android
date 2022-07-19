@@ -22,7 +22,7 @@ ext {
     hiltVersion = '2.42'
     sandwichVersion = '1.2.6'
     moshiVersion = '1.13.0'
-    swipeToRegreshVersion = '1.1.0'
+    swipeToRefreshVersion = '1.1.0'
 
     // Testing
     jUnitVersion = '4.13.2'
@@ -78,7 +78,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navigationUiVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationFragmentVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRegreshVersion"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipeToRefreshVersion"
     implementation "com.google.android.material:material:$materialVersion"
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
