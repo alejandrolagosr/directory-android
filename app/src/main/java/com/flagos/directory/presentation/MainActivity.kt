@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat.getColor
 import com.flagos.directory.R
 import com.flagos.directory.databinding.ActivityMainBinding
 import com.flagos.directory.domain.model.EmployeeItem
@@ -31,8 +32,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun setUpViews() {
         binding.recycler.adapter = adapter
-        binding.swipeToRefresh.setOnRefreshListener {
-            viewModel.fetchEmployees()
+        with(binding.swipeToRefresh) {
+            val color = getColor(this@MainActivity, R.color.teal_200)
+            setColorSchemeColors(color)
+            setOnRefreshListener {
+                viewModel.fetchEmployees()
+            }
         }
     }
 
