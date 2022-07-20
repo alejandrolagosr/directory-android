@@ -18,11 +18,11 @@ class MainViewModel @Inject constructor(private val employeeDirectoryRepository:
     val onEmployeeDirectoryState get() = _onEmployeeDirectoryState
 
     fun fetchEmployees() {
-            val employees = employeeDirectoryRepository.fetchEmployeeDirectoryList(
-                onStart = { _onEmployeeDirectoryState.postValue(OnLoading(true)) },
-                onComplete = { _onEmployeeDirectoryState.postValue(OnLoading(false)) },
-                onError = { _onEmployeeDirectoryState.postValue(OnError(it)) }
-            )
+        val employees = employeeDirectoryRepository.fetchEmployeeDirectoryList(
+            onStart = { _onEmployeeDirectoryState.postValue(OnLoading(true)) },
+            onComplete = { _onEmployeeDirectoryState.postValue(OnLoading(false)) },
+            onError = { _onEmployeeDirectoryState.postValue(OnError(it)) }
+        )
 
         viewModelScope.launch {
             employees.distinctUntilChanged().collect { list ->
@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(private val employeeDirectoryRepository:
     sealed class EmployeeDirectoryState {
         data class OnLoading(val loading: Boolean) : EmployeeDirectoryState()
         data class OnError(val error: String?) : EmployeeDirectoryState()
-        data class OnListRetrieved(val list : List<EmployeeItem>): EmployeeDirectoryState()
+        data class OnListRetrieved(val list: List<EmployeeItem>) : EmployeeDirectoryState()
         object OnEmptyList : EmployeeDirectoryState()
     }
 }
