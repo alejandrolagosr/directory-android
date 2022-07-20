@@ -2,7 +2,6 @@ package com.flagos.directory.data
 
 import app.cash.turbine.test
 import com.flagos.directory.MainCoroutinesRule
-import com.flagos.directory.MockUtils
 import com.flagos.directory.MockUtils.mockEmployeeDirectoryList
 import com.flagos.directory.data.network.EmployeeDirectoryClient
 import com.flagos.directory.data.network.EmployeeDirectoryService
