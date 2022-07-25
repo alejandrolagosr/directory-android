@@ -4,7 +4,7 @@ import com.flagos.directory.domain.model.EmployeeItem
 
 object MockUtils {
 
-    fun mockEmployee(): EmployeeItem = EmployeeItem(
+    private fun mockEmployee(): EmployeeItem = EmployeeItem(
         "0d8fcc12-4d0c-425c-8355-390b312b909c",
         "Justine Mason",
         "5553280123",
