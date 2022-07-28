@@ -1,7 +1,7 @@
 <h1 align="center">Employee Directory</h1>
 
 <p align="center">  
-Employee Directory is a sample app demostrating the use of Hilt, Coroutines, Flow, Jetpack (ViewModel), Material design and MVVM architecture with a very easy to use API and an easy to understand code
+Employee Directory is a sample app demonstrating the use of Hilt, Coroutines, Flow, Jetpack (ViewModel), Material design and MVVM architecture with a very easy to use API and an easy to understand code
 </br></br>
 <img src="https://user-images.githubusercontent.com/7938140/179643164-2fddbb91-b087-4a55-ba3d-75eca45d49ef.png"/>
 </p>
