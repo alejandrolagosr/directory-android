@@ -29,7 +29,7 @@ abstract class ApiAbstract<T> {
     @get:Rule
     val coroutinesRule = MainCoroutinesRule()
 
-    lateinit var mockWebServer: MockWebServer
+    private lateinit var mockWebServer: MockWebServer
 
     @Before
     fun mockServer() {
